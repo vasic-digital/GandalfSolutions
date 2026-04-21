@@ -8,13 +8,14 @@ import (
 
 func TestLevelSolutionValidateValid(t *testing.T) {
 	opts := LevelSolution{
-		Techniques: "test",
-		Category: "test",
-		Description: "test description",
-		Difficulty: "test",
+		Level:            1,
+		Techniques:       []string{"test"},
+		Category:         "test",
+		Description:      "test description",
+		Difficulty:       "test",
 		SystemPromptLeak: "test systempromptleak",
-		Solutions: "test",
-		Name: "Test Name",
+		Solutions:        []string{"test"},
+		Name:             "Test Name",
 	}
 	assert.NoError(t, opts.Validate())
 }
@@ -28,10 +29,10 @@ func TestLevelSolutionValidateEmpty(t *testing.T) {
 func TestAdventureSolutionValidateValid(t *testing.T) {
 	opts := AdventureSolution{
 		Description: "test description",
-		Adventure: "test",
-		Difficulty: "test",
-		Solutions: "test",
-		Name: "Test Name",
+		Adventure:   "test",
+		Difficulty:  "test",
+		Solutions:   []string{"test"},
+		Name:        "Test Name",
 	}
 	assert.NoError(t, opts.Validate())
 }
@@ -44,13 +45,13 @@ func TestAdventureSolutionValidateEmpty(t *testing.T) {
 
 func TestPromptLeakValidateValid(t *testing.T) {
 	opts := PromptLeak{
-		Model: "gpt-4",
-		Date: "test",
-		LeakedContent: "test",
-		ID: "test-id-123",
+		Model:            "gpt-4",
+		Date:             "test",
+		LeakedContent:    "test",
+		ID:               "test-id-123",
 		ExtractionMethod: "test",
-		Source: "test",
-		Confidence: 0.95,
+		Source:           "test",
+		Confidence:       0.95,
 	}
 	assert.NoError(t, opts.Validate())
 }
@@ -63,11 +64,11 @@ func TestPromptLeakValidateEmpty(t *testing.T) {
 
 func TestSearchOptionsValidateValid(t *testing.T) {
 	opts := SearchOptions{
-		Query: "test query",
-		Techniques: "test",
+		Query:      "test query",
+		Techniques: []string{"test"},
 		Difficulty: "test",
-		Limit: 10,
-		Categories: "test",
+		Limit:      10,
+		Categories: []string{"test"},
 	}
 	assert.NoError(t, opts.Validate())
 }
@@ -86,7 +87,7 @@ func TestSearchOptionsDefaults(t *testing.T) {
 }
 
 func TestPromptLeakValidateConfidenceRange(t *testing.T) {
-	opts := PromptLeak{ID: "test", Confidence: 1.5}
+	opts := PromptLeak{Model: "gpt-4", ID: "test", Confidence: 1.5}
 	assert.Error(t, opts.Validate())
 	opts.Confidence = -0.1
 	assert.Error(t, opts.Validate())

@@ -4,9 +4,10 @@ Module-specific guidance for Claude Code.
 
 ## Status
 
-**SCAFFOLD / WIP.** All exported method bodies return
-`ErrCodeUnimplemented`. The module compiles but is not yet
-functional. Phase-A implementation is a future milestone.
+**FUNCTIONAL.** 2 packages (types, client) ship tested implementations;
+`go test -race ./...` all green. Default in-memory corpus of 8 Gandalf
+levels + 2 adventures is seeded on `New()`. Richer corpora can be
+layered in via `LoadCorpus(path)`.
 
 ## Hard rules
 
@@ -18,15 +19,29 @@ functional. Phase-A implementation is a future milestone.
 3. **Conventional Commits** -- `feat(gandalfsolutions): ...`, `fix(...)`,
    `docs(...)`, `test(...)`, `refactor(...)`.
 4. **Code style** -- `gofmt`, `goimports`, 100-char line ceiling,
-   errors always checked and wrapped.
+   errors always checked and wrapped (`fmt.Errorf("...: %w", err)`).
 5. **Resource cap for tests** --
    `GOMAXPROCS=2 nice -n 19 ionice -c 3 go test -count=1 -p 1 -race ./...`
 
-## Purpose (intended)
+## Purpose
 
-Read-only solutions archive for prompt-leak-defense testing.
+Read-only solutions archive for prompt-leak-defense research and
+testing. Provides:
+
+- `pkg/types` — value types with `Validate`/`Defaults`
+- `pkg/client` — in-memory read-only store with query surface
+  (`GetLevel`, `GetAdventure`, `SearchSolutions`, `GetPromptLeaks`,
+  `GetTechniques`, `GetCategories`, `GetArchiveStats`, `ExportLevel`,
+  `LoadCorpus`, `Count`)
 
 ## Primary consumer
 
-HelixAgent (`dev.helix.agent`). See the consuming-side Phase-A spec
-at `docs/superpowers/specs/2026-04-21-elder-plinius-phaseA-go-gandalf-solutions.md` in the HelixAgent repository.
+HelixAgent (`dev.helix.agent`) — red-team / guardrail subsystems.
+
+## Testing
+
+```
+GOMAXPROCS=2 nice -n 19 ionice -c 3 go test -count=1 -p 1 -race ./...
+```
+
+Must stay all-green on every commit.
