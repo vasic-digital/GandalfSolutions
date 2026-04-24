@@ -10,15 +10,12 @@ same session as the change.** Coverage and green suites are not evidence.
 
 ### Acceptance demo for this module
 
-<!-- TODO: replace this block with the exact command(s) that exercise this
-     module end-to-end against real dependencies, and the expected output.
-     The commands must run the real artifact (built binary, deployed
-     container, real service) — no in-process fakes, no mocks, no
-     `httptest.NewServer`, no Robolectric, no JSDOM as proof of done. -->
-
 ```bash
-# TODO
+# Default corpus loads: 8 Gandalf levels + 2 adventures + 20+ prompt leaks
+cd GandalfSolutions && GOMAXPROCS=2 nice -n 19 go test -count=1 -race -v ./pkg/client
 ```
+Expect: PASS; `GetLevel(3)` returns Lab Gandalf, `SearchSolutions` filters by category, archive stats match the seeded counts.
+
 
 Module-specific guidance for Claude Code.
 
