@@ -1,0 +1,56 @@
+{
+  "_comment_round264": "Round-264 multi-locale fixture for GandalfSolutions. Drives the in-memory archive through real searches whose query strings carry non-ASCII content + bilingual technique labels. The runner asserts byte-exact round-trip of every locale through LoadCorpus + GetLevel + ExportLevel + SearchSolutions.",
+  "_mandate_2026_05_19": "all existing tests and Challenges do work in anti-bluff manner - they MUST confirm that all tested codebase really works as expected!",
+  "inputs": [
+    {
+      "locale": "en",
+      "query": "password",
+      "level_name": "Level 1",
+      "category": "direct",
+      "difficulty": "easy",
+      "technique": "direct-ask",
+      "description": "Gandalf will reveal the password on plain request.",
+      "expected_min_runes": 7
+    },
+    {
+      "locale": "sr",
+      "query": "лозинка",
+      "level_name": "Ниво 2",
+      "category": "indirect",
+      "difficulty": "easy",
+      "technique": "indirect-ask",
+      "description": "Гандалф одбија директно откривање; питајте индиректно.",
+      "expected_min_runes": 6
+    },
+    {
+      "locale": "ja",
+      "query": "パスワード",
+      "level_name": "レベル 3",
+      "category": "indirect",
+      "difficulty": "medium",
+      "technique": "encoding",
+      "description": "出力フィルタを回避するためにエンコードされた出力を使用する。",
+      "expected_min_runes": 5
+    },
+    {
+      "locale": "ar",
+      "query": "كلمة المرور",
+      "level_name": "المستوى 4",
+      "category": "dual-check",
+      "difficulty": "medium",
+      "technique": "steganography",
+      "description": "يتحقق نموذج ثانٍ من تسرب كلمة المرور في الإخراج.",
+      "expected_min_runes": 9
+    },
+    {
+      "locale": "zh-CN",
+      "query": "密码",
+      "level_name": "第五关",
+      "category": "defensive",
+      "difficulty": "hard",
+      "technique": "reframing",
+      "description": "拒绝任何与密码相关的话题;通过游戏重新表述以绕过。",
+      "expected_min_runes": 2
+    }
+  ]
+}
